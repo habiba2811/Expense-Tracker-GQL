@@ -7,7 +7,7 @@ import { GraphQLLocalStrategy} from "graphql-passport";
 
 export const configurePassport = async ()=> {
     passport.serializeUser((user,done) => {
-        console.log("Serializin user");
+        console.log("Serializing user");
         done(null,user._id);
     });
 
@@ -37,6 +37,7 @@ export const configurePassport = async ()=> {
                 
             }
         } )
+    
     )
 };
 

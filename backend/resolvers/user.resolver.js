@@ -1,4 +1,4 @@
-import {users} from '../dummyData/data.js';
+//import {users} from '../dummyData/data.js';
 import User from '../models/user.model.js';
 import bcrybt from 'bcryptjs';
 
@@ -53,10 +53,10 @@ const userResolver ={
         logout: async(_,__,context) => {
             try {
                 await context.logout();
-                req.session.destroy((err) => {
+                context.req.session.destroy((err) => {
                     if (err) throw err;
                 })
-                res.clearCookie("connect.sid");
+                context.res.clearCookie("connect.sid");
                 return {message:"looged out successfully" };
 
             } catch (err) {
@@ -67,13 +67,12 @@ const userResolver ={
 
     },
     Query:{
-        authUser: async(_,__,context)  =>{
+        authUser: async(_,__,context) => {
             try {
                 const user = await context.getUser();
-                return user;
             } catch (err) {
                 console.error("Error in authUser: ",err);
-                throw new Error (err.message || "Internal server error")
+                throw new Error ("Internal server error")
             }
         },  
         user: async(_,{userId}) =>{
