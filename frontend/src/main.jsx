@@ -26,5 +26,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </ApolloProvider>
     </GridBackground>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

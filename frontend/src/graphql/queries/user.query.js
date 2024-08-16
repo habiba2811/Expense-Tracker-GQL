@@ -6,6 +6,8 @@ export const GET_AUTHENTICATED_USER = gql`
 			_id
 			username
 			name
+			profilePicture
+			
 		}
 	}
 `;

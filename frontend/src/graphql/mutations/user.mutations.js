@@ -6,6 +6,7 @@ export const SIGN_UP = gql`
             _id
             name
             username
+            profilePicture
     }
 }
 `;
@@ -22,7 +23,7 @@ export const LOGIN = gql`
 
 export const LOGOUT =gql`
   mutation Logout{
-    Logout{
+    logout{
         message
     }
   }

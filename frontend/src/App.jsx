@@ -8,27 +8,45 @@ import Header from "./components/ui/Header";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
 import { Toaster } from "react-hot-toast";
-import { useEffect } from "react";
+import React, { useEffect } from 'react';
+import { useApolloClient } from "@apollo/client";
+
 
 function App() {
   const { loading, data } = useQuery(GET_AUTHENTICATED_USER);
+  const client = useApolloClient();
+  useEffect(() => {
+    console.log("Loading:", loading);
+    console.log("Data:", data);
+    console.log("Auth User:", data?.authUser);
+  }, [loading, data]);
 
   useEffect(() => {
-    console.log("Authenticated User Data:", data);
-  }, [data]);
+    if (!loading && data) {
+      client.cache.modify({
+        fields: {
+          authUser() {
+            return data.authUser;
+          }
+        }
+      });
+    }
+  }, [data, loading, client]);
 
-  if (loading) return null;
+  if (loading) return <div>Loading...</div>; // Display a loading message or spinner
+
+  const authUser = data?.authUser;
 
   return (
     <>
-      {data?.authUser && <Header />}
+      {authUser && <Header />}
       <Routes>
-        <Route path='/' element={data.authUser ? <HomePage /> : <Navigate to='/login' />} />
-        <Route path='/login' element={!data.authUser ? <LoginPage /> : <Navigate to='/' />} />
-        <Route path='/signup' element={!data.authUser ? <SignUpPage /> : <Navigate to='/' />} />
+        <Route path='/' element={authUser ? <HomePage /> : <Navigate to='/login' />} />
+        <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
+        <Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/' />} />
         <Route
           path='/transaction/:id'
-          element={data.authUser ? <TransactionPage /> : <Navigate to='/login' />}
+          element={authUser ? <TransactionPage /> : <Navigate to='/login' />}
         />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
