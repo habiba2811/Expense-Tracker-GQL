@@ -5,14 +5,16 @@ import { GET_TRANSACTION } from "../graphql/queries/transaction.query";
 import { UPDATE_TRANSACTION } from "../graphql/mutations/transaction.mutation";
 import toast from "react-hot-toast";
 import TransactionFormSkeleton from "../components/skeletons/TransactionFormSkeleton";
+import { GET_TRANSACTION_STATISTICS } from "../graphql/queries/transaction.query";
 const TransactionPage = () => {
 	const {id} = useParams()
 	const {loading,data} =useQuery(GET_TRANSACTION,{
 		variables:{id:id},
 	})
+	console.log("transaction", data)
 
 	const [updateTransaction, { loading: loadingUpdate }] = useMutation(UPDATE_TRANSACTION,{
-		refetchQueries: [{ query: GET_TRANSACTIONS },{ query: GET_TRANSACTION_STATISTICS  }],
+		refetchQueries: [{ query: GET_TRANSACTION_STATISTICS  }],
 
 });
 

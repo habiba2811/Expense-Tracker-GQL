@@ -1,3 +1,4 @@
+import Transaction from '../models/transaction.model.js'
 import User from '../models/user.model.js';
 import bcrybt from 'bcryptjs';
 
@@ -17,16 +18,16 @@ const userResolver ={
               const salt = await bcrybt.genSalt(10);
               const hashedPassword = await bcrybt.hash(password, salt);
 
-              const boyProfilePic =`https://avatar.iran.liara.run/public/boy?username=${username}`;
-              const girlProfilePic =`https://avatar.iran.liara.run/public/girl?username=${username}`;
+              const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+              const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
               const newUser =new User({
                 username,
                 name,
                 password:hashedPassword,
                 gender,
-                profilePicture: gender === "girl"? girlProfilePic: boyProfilePic,
-              })
+                profilePicture: gender === "male" ? boyProfilePic : girlProfilePic,
+            })
               await newUser.save();
               await context.login(newUser);
               return newUser;
@@ -86,7 +87,18 @@ const userResolver ={
 			}
 		},
 	},
-    //TODO => ADD USER/TRANSATION RELATION
+    User:{
+        transactions:async(parent) =>{
+            try {
+                const transactions = await Transaction.find({userId:parent._id})
+                return transactions
+                
+            } catch (error) {
+                console.log("error  in user.transaction resolver: ",error)
+                throw new Error(err.message || "Internail server error")
+            }
+        }
+    }
 };
 
 export default userResolver;
