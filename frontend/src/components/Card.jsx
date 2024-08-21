@@ -10,7 +10,7 @@ import { formatDate } from "../utils/formatDate";
 import {toast} from "react-hot-toast"
 import { useMutation } from "@apollo/client";
 import { DELETE_TRANSACTION } from "../graphql/mutations/transaction.mutation";
-import { GET_TRANSACTIONS } from '../graphql/queries/transaction.query';
+import { GET_TRANSACTION_STATISTICS, GET_TRANSACTIONS } from '../graphql/queries/transaction.query';
 
 
 const categoryColorMap = {
@@ -25,7 +25,7 @@ const Card = ({ transaction }) => {
 	const cardClass = categoryColorMap[category];
 
     const [deleteTransaction,{loading}] = useMutation(DELETE_TRANSACTION,{
-		refetchQueries: [{ query: GET_TRANSACTIONS }]
+		refetchQueries: [{ query: GET_TRANSACTIONS },{ query: GET_TRANSACTION_STATISTICS  }]
 	})
 
 	// Capitalize first letter 
