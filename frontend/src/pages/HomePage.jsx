@@ -1,6 +1,5 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { GET_AUTHENTICATED_USER } from "../graphql/queries/user.query";
 import Cards from "../components/Cards";
 import TransactionForm from "../components/TransactionForm";
 import toast from "react-hot-toast";

@@ -11,6 +11,7 @@ const client = new ApolloClient({
   //TODO =>Update uri on production
   uri:"http://localhost:4000/graphql",
   cache: new InMemoryCache(),
+  credentials: "include",
   formatError: (err) => {
     console.error(err); // Log errors for debugging
     return err;

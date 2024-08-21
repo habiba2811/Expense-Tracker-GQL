@@ -16,7 +16,7 @@ export const LOGIN = gql`
         login(input:$input){
             _id
             name
-            username
+            password
     }
 }
 `;
