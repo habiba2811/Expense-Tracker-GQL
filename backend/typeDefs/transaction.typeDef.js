@@ -33,7 +33,7 @@ const transactionTypeDef =`#graphql
   }
 
   input UpdateTransactionInput{
-    transactionID: ID!
+    transactionId: ID!
     description: String
     paymentType: String
     category: String
