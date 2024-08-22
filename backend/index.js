@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import passport from 'passport';
 import session from 'express-session';
 import connectMongo from "connect-mongodb-session";
+import path from 'path'
 
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from '@apollo/server/express4';
@@ -21,6 +22,8 @@ import {configurePassport} from "./passport/passport.config.js";
 
 dotenv.config();
 configurePassport();
+
+const __dirname = path.resolve()
 const app = express();
 
 const httpServer = http.createServer(app);
@@ -76,6 +79,13 @@ app.use(
     context: async ({ req, res }) => buildContext({ req, res }),
   }),
 );
+
+//render.com => backend,forntend under the same domain
+//npm run build will built frontend app, optimized
+app.use(express.static(path.join(__dirname,"frontend/dist")))
+app.get("*",(req,res) => {
+  res.sendFile(path.join(__dirname,"frontend/dist","index.html"))
+})
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
