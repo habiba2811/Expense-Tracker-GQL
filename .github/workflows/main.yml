@@ -32,12 +32,3 @@ jobs:
         with:
           push: true
           tags: habiba151/expense-tracker-gql:1.0.0
-
-      - name: Deploy to Render via API
-        run: |
-          curl -X POST "https://api.render.com/v1/services/{SERVICE_ID}/deploys" \
-          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "dockerImage": "habiba151/expense-tracker-gql:1.0.0"
-          }'
