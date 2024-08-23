@@ -69,8 +69,9 @@ await server.start();
 app.use(
 	"/graphql",
 	cors({
-		origin:['https://expense-tracker-gql-1-0-0.onrender.com', 'http://localhost:3000'],
+		origin:'*',
 		credentials: true,
+    optionSuccessStatus:200,
 	}),
   express.json(),
   // expressMiddleware accepts the same arguments:
