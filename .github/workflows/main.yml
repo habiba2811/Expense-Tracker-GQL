@@ -33,18 +33,11 @@ jobs:
           push: true
           tags: habiba151/expense-tracker-gql:1.0.0
 
-      - name: Install Render CLI
+      - name: Deploy to Render via API
         run: |
-          curl -fsSL https://render.com/static/cli/install.sh | bash
-        env:
-          RENDER_TOKEN: ${{ secrets.RENDER_TOKEN }}
-
-      - name: Verify Render CLI installation
-        run: render --version
-
-      - name: Deploy to Render
-        run: |
-          render services update expense-tracker-gql --envfile .env.production --dockerhub-image habiba151/expense-tracker-gql:1.0.0
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-
+          curl -X POST "https://api.render.com/v1/services/{SERVICE_ID}/deploys" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "dockerImage": "habiba151/expense-tracker-gql:1.0.0"
+          }'
