@@ -8,7 +8,7 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
 const client = new ApolloClient({
 
-  uri: import.meta.env.VITE_NODE_ENV === "development"? "http://localhost:4000/graphql" : "https://expense-tracker-gql-1-0-0.onrender.com/",
+  uri: import.meta.env.VITE_NODE_ENV === "development"? "http://localhost:4000/graphql" : "/graphql",
   cache: new InMemoryCache(),
   credentials: "include",
   formatError: (err) => {
