@@ -23,8 +23,7 @@ Expense Tracker GraphQL is a full-stack application for managing personal financ
 - **MongoDB**: Data persistence using MongoDB.
 - **React Frontend**: Intuitive UI built with React.
 - **Dockerized**: Easy to deploy and run using Docker.
-- **CI/CD Pipeline**: Automated deployment using GitHub Actions and Render.
-
+- **CI/CD Pipeline**: Automated deployment using GitHub Actions.
 ## Tech Stack
 
 - **Frontend**: React, Apollo Client
