@@ -37,6 +37,6 @@ const userTypeDef = `#graphql
       message:String!
    }
 
-`
+`;
 
-export default userTypeDef
+export default userTypeDef;

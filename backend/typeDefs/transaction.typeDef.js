@@ -1,4 +1,4 @@
-const transactionTypeDef =`#graphql
+const transactionTypeDef = `#graphql
   type Transaction{
     _id: ID!
     userID: ID!
@@ -49,6 +49,6 @@ const transactionTypeDef =`#graphql
     date: String
   }
 
-`
+`;
 
 export default transactionTypeDef;

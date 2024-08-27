@@ -1,21 +1,21 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import TransactionPage from "./pages/TransactionPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import Header from "./components/ui/Header";
-import { useQuery } from "@apollo/client";
-import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
-import { Toaster } from "react-hot-toast";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
+import TransactionPage from './pages/TransactionPage';
+import NotFoundPage from './pages/NotFoundPage';
+import Header from './components/ui/Header';
+import { useQuery } from '@apollo/client';
+import { GET_AUTHENTICATED_USER } from './graphql/queries/user.query';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
-	const { loading, data } = useQuery(GET_AUTHENTICATED_USER);
+  const { loading, data } = useQuery(GET_AUTHENTICATED_USER);
 
-	if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
 
-	return (
-		<>
+  return (
+    <>
       {data?.authUser && <Header />}
       <Routes>
         <Route
@@ -24,7 +24,7 @@ function App() {
         />
         <Route
           path="/login"
-          element={data?.authUser ? <Navigate to="/" /> : <LoginPage /> }
+          element={data?.authUser ? <Navigate to="/" /> : <LoginPage />}
         />
         <Route
           path="/signup"
@@ -32,13 +32,15 @@ function App() {
         />
         <Route
           path="/transaction/:id"
-          element={data?.authUser ? <TransactionPage /> : <Navigate to="/login" />}
+          element={
+            data?.authUser ? <TransactionPage /> : <Navigate to="/login" />
+          }
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Toaster />
     </>
-	);
+  );
 }
 
 export default App;
