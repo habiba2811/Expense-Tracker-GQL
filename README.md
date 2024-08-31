@@ -12,8 +12,7 @@ Expense Tracker GraphQL is a full-stack application for managing personal financ
 
 ## Demo
 
-![Untitled design (1)](https://github.com/user-attachments/assets/cc325a38-88fa-48ef-9e75-c3d945a27ca8)
-
+![Untitled design (3)](https://github.com/user-attachments/assets/9f60ac2c-48b4-4127-b1bf-550a26121d2c)
 
 ## Features
 
